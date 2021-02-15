@@ -36,7 +36,8 @@
   </div>
   <h4 class="mb-3">Car Body parts</h4>
         <div style="width:300px;">
-            <div><img src="{% static 'inputcs/left_body.jpg' %}" alt="" width="500" height="600"/></div>
+            <img src="{% static 'inputcs/left_body.jpg' %}" id="reference-img" alt="" style="display: none"/>
+            <div><canvas height="500" id="drawing-canvas"></canvas></div>
             <div style="padding-top:20px;">
                 <div id="coord"></div>
             </div>
@@ -45,7 +46,8 @@
 </div>
     <tr>
       <td></td>
-      <td><button type="submit">Send</button></td>
+      <td><button onclick="download()">Download</button></td>
+      <td><button onclick="clearCanvas()">Clear</button></td>
     </tr>
 
     
