@@ -1,0 +1,52 @@
+{# inputcs/templates/inputcs/sheet_form.html #}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+<form action="{% url 'defect-input' %}" method="post" enctype="multipart/form-data" novalidate>
+  {% csrf_token %}
+  <div class="row">
+  <div class="col-md-6 mb-3">
+    <label for="firstName">Process: </label>
+    {{ form.process }}
+    <div class="invalid-feedback">
+      Valid first name is required.
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="firstName">Period: </label>
+    {{ form.period }}
+    <div class="invalid-feedback">
+      Valid first name is required.
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="firstName">Defect: </label>
+    {{ form.defect }}
+    <div class="invalid-feedback">
+      Valid first name is required.
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <label for="firstName">Location: </label>
+    {{ form.location }}
+    <div class="invalid-feedback">
+      Valid first name is required.
+    </div>
+  </div>
+  <h4 class="mb-3">Car Body parts</h4>
+        <div style="width:300px;">
+            <div><img src="{% static 'inputcs/left_body.jpg' %}" alt="" width="500" height="600"/></div>
+            <div style="padding-top:20px;">
+                <div id="coord"></div>
+            </div>
+        </div>
+
+</div>
+    <tr>
+      <td></td>
+      <td><button type="submit">Send</button></td>
+    </tr>
+
+    
+</form>
