@@ -3,6 +3,8 @@
 
 {% load crispy_forms_tags %}
 
+
+
 <form action="{% url 'defect-input' %}" method="post" enctype="multipart/form-data" novalidate>
   {% csrf_token %}
   <div class="row">
@@ -35,17 +37,22 @@
     </div>
   </div>
   <h4 class="mb-3">Car Body parts</h4>
-        <div style="width:300px;">
+  
+  <canvas id="canvas" width="690" height="651" style="cursor:crosshair;background-image: url('{% static 'inputcs/left_body.jpg' %}'); background-size: cover">
+  
+  </canvas>
+
+    <div style="width:300px;">
             <div><img src="{% static 'inputcs/left_body.jpg' %}" alt="" width="500" height="600"/></div>
             <div style="padding-top:20px;">
                 <div id="coord"></div>
             </div>
         </div>
-
+      
 </div>
     <tr>
       <td></td>
-      <td><button type="submit">Send</button></td>
+      <td><button type="submit" class="btn btn-primary">Submit</button></td>
     </tr>
 
     
