@@ -1,0 +1,96 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="AjaxImageForm" method="POST">
+        {% csrf_token %}
+        {{ form|crispy  }}
+        <input type="submit" name="signupSubmit" class="btn btn-success btn-lg" />
+    </form>
+
+    {% for c in coord %}
+    {{ c.image_coord }}
+    {% endfor %}
+    <!-- <div style="width:300px;"> -->
+        <img src="{% static 'inputcs/images/left_body2.jpg' %}" id="reference-img" alt="" style="display: none"/>
+        <div>
+            <canvas height="500" id="drawing-canvas">
+
+            </canvas>
+        </div>
+        <div style="padding-top:20px;">
+            <div id="coord"></div>
+        </div>
+    <!-- </div> -->
+
+    <!-- <img src="{% static 'inputcs/left_body2.jpg' %}" id="reference-img" alt=""/> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script>window.jQuery || document.write('<script src="{% static "inputcs/js/jquery.slim.min.js" %}"><\/script>')
+    </script>
+    
+    <script src="{% static 'inputcs/js/bootstrap.bundle.min.js'%}">
+    </script>
+
+
+
+
+
+<!-- {% for i in defects %} -->
+<script >
+    
+        var canvas;
+        var ctx;
+        var refImage;
+
+        $(document).ready(function() {
+        canvas = document.getElementById('drawing-canvas');
+        ctx = canvas.getContext('2d');
+        refImage = document.getElementById('reference-img');
+        drawImageScaled(refImage, ctx);
+            ctx.font = '22px normal'
+            ctx.fillStyle = 'red';
+            {% for i in defects %}
+            ctx.fillText("{{ i.id }}", "{{i.coorx}}", "{{i.coory}}");
+            {% endfor %}
+        // $(canvas).click(function(e) {
+        //     const offset = $(this).offset();
+        //     const x = (e.pageX - offset.left) - 5;
+        //     const y = (e.pageY - offset.top) + 10;
+        //     ctx.font = '22px normal'
+        //     ctx.fillStyle = 'red';
+        //     ctx.fillText("{{ i.id }}", x, y);
+            // console.log(ctx, refImage)
+            // console.log(x, y);
+            // console.log(e.pageX);
+            // console.log(offset);
+        });
+
+        function drawImageScaled(img, ctx) {
+        var canvas = ctx.canvas;
+        var hRatio = canvas.width / img.width;
+        var vRatio = canvas.height / img.height;
+        var ratio  = Math.min ( hRatio, vRatio );
+        var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+        var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.drawImage(img, 0,0, img.width, img.height,
+                            centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
+        }
+
+
+    </script>
+
+<!-- {% endfor %}     -->
+</body>
+</html>
+

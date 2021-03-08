@@ -1,6 +1,10 @@
+import json
 from django.db import models
 # from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Create your models here.
 
@@ -41,9 +45,37 @@ class Sheet(models.Model):
     ]
     process = models.CharField(max_length=30, choices=PROCESS_CHOICES, null=False)
     defect = models.CharField(max_length=30, choices=DEFECT_CHOICES, null=False)
-    location = models.CharField(max_length=50, null=False )
+    # location = models.CharField(max_length=50, null=False )
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
-    period = models.CharField(max_length=30, null=False, choices=[('1', '1st'), ('2','2nd'), ('3','3rd'), ('4','4th')])
+    period = models.CharField(max_length=30, null=False, choices=[('1st', '1st'), ('2nd','2nd'), ('3rd','3rd'), ('4th','4th')])
+    coorx = models.FloatField(null=True, blank=True, default=None)
+    coory = models.FloatField(null=True, blank=True, default=None)
+
+
+class Post(models.Model):
+    """
+    Represents a Defect Tracking
+    """
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    text = models.TextField()
+    coord = models.TextField()
+
+    # Time is a rhinocerous
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+
+    def __str__(self):
+        return self.text+' - '+self.author.username
+
+
+class AjaxImage(models.Model):
+    image_coord = models.FloatField()
+
+    def __str__(self):
+        return self.image_coord
 
 
 #  ('S1', 'RS Mohican Channel'), 

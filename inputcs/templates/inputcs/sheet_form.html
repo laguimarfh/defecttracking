@@ -3,56 +3,88 @@
 
 {% load crispy_forms_tags %}
 
+<div class="row">
 
-
-<form action="{% url 'defect-input' %}" method="post" enctype="multipart/form-data" novalidate>
-  {% csrf_token %}
-  <div class="row">
-  <div class="col-md-6 mb-3">
-    <label for="firstName">Process: </label>
-    {{ form.process }}
-    <div class="invalid-feedback">
-      Valid first name is required.
-    </div>
-  </div>
-  <div class="col-md-6 mb-3">
-    <label for="firstName">Period: </label>
-    {{ form.period }}
-    <div class="invalid-feedback">
-      Valid first name is required.
-    </div>
-  </div>
-  <div class="col-md-6 mb-3">
-    <label for="firstName">Defect: </label>
-    {{ form.defect }}
-    <div class="invalid-feedback">
-      Valid first name is required.
-    </div>
-  </div>
-  <div class="col-md-6 mb-3">
-    <label for="firstName">Location: </label>
-    {{ form.location }}
-    <div class="invalid-feedback">
-      Valid first name is required.
-    </div>
-  </div>
-  <h4 class="mb-3">Car Body parts</h4>
+  <div class="col-md-7 col-lg-7">
+    <h4 class="mb-3">Body Image </h4>
+    <p> Click on the image to add a defect </p>
+    <a href="{% url 'input'%}"> Clear Picture </a>
+  
         <div style="width:300px;">
-            <img src="{% static 'inputcs/left_body.jpg' %}" id="reference-img" alt="" style="display: none"/>
-            <div><canvas height="500" id="drawing-canvas"></canvas></div>
+            <img src="{% static 'inputcs/images/body_Rx.jpg' %}" id="reference-img" alt="" style="display: none"/>
+            <div><canvas width="600"   height="450" id="drawing-canvas" style="border:1px solid #000000;"></canvas></div>
             <div style="padding-top:20px;">
                 <div id="coord"></div>
             </div>
         </div>
       
-</div>
-    <tr>
+  </div>
+      
+  <div class="col-md-8 col-lg-5 order-md-last">
+    <h4>Complete the form and click submit</h4>
+    <form action="{% url 'defect-input' %}" method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="Process">Process: </label>
+            {{ form.process }}
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="Period">Period: </label>
+            {{ form.period }}
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="Defect">Defect: </label>
+            {{ form.defect }}
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+        </div>
+
+          <!-- <div class="col-md-6 mb-3">
+            <label for="Location">Location: </label>
+            {{ form.location }}
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div> -->
+          <!-- <div class="col-md-6 mb-3">
+            <label for="Coorx">Coorx: </label> -->
+            <input id = "coorx" type="hidden" name="coorx" maxlength="20" required="" id="id_coorx">    
+            <!-- <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div> -->
+          <!-- <div class="col-md-6 mb-3">
+            <label for="Coory">Coory: </label> -->
+            <input id = "coory" type="hidden" name="coory" maxlength="20" required="" id="id_coory">    
+            <!-- <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div> -->
+        <!-- </div> -->
+
+  
+      
+      <tr>
       <td></td>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <!-- <td><button onclick="download()">Download</button></td>
+      <td><button onclick="clearCanvas()">Clear</button></td> -->
 
-      <td><button onclick="download()">Download</button></td>
-      <td><button onclick="clearCanvas()">Clear</button></td>
+      </tr>
 
-    </tr>
+  
 
+</div>
     
 </form>
+
+
