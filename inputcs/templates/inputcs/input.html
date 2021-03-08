@@ -1,6 +1,20 @@
 {% extends 'inputcs/base.html' %}
 {% load static %}
 
+       
+
+
+{% block content %}
+
+{% with form=sheet_form %}
+    {% include "inputcs/sheet_form.html" %}
+{% endwith %}
+  
+      
+       
+                
+{% endblock %}
+
 {% block javascript %}
 
 <script>
@@ -64,18 +78,4 @@
    
    
    </script>
-{% endblock %}          
-
-
-{% block content %}
-
-{% with form=sheet_form %}
-    {% include "inputcs/sheet_form.html" %}
-{% endwith %}
-  
-      
-       
-                
-{% endblock %}
-
-
+{% endblock %}   
