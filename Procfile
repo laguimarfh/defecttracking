@@ -1,1 +1,1 @@
-web: gunicorn soccerblog.wsgi
+web: gunicorn defecttracking.wsgi
