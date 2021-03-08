@@ -50,7 +50,7 @@ class Sheet(models.Model):
     period = models.CharField(max_length=30, null=False, choices=[('1st', '1st'), ('2nd','2nd'), ('3rd','3rd'), ('4th','4th')])
     coorx = models.FloatField(null=True, blank=True, default=None)
     coory = models.FloatField(null=True, blank=True, default=None)
-    count_day = models.IntegerField(null=True, blank=True, default=None)
+    
 
 
 class Post(models.Model):
