@@ -5,74 +5,74 @@
 
 {% with form=sheet_form %}
     {% include "inputcs/sheet_form.html" %}
-  {% endwith %}
+{% endwith %}
   
       
        
-       {% block javascript %}
-
-       <script>
-          
-
-          var canvas;
-          var ctx;
-          var refImage;
-
-          $(document).ready(function() {
-            canvas = document.getElementById('drawing-canvas');
-            ctx = canvas.getContext('2d');
-            refImage = document.getElementById('reference-img');
-            drawImageScaled(refImage, ctx);            
-          
-            $(canvas).click(function(e) {
-              const offset = $(this).offset();
-              const x = (e.pageX - offset.left) - 5;
-              const y = (e.pageY - offset.top) + 10;
-              ctx.font = '22px normal'
-              ctx.fillStyle = 'red';
-             
-              if (ctx.fillText) {
-                var answer = window.confirm("Save data?");
-                  if (answer) {
-                      ctx.fillText('X', x, y);
-                      $(canvas).off('click');//some code
-                    }
-                  else {
-                  context.clearRect(0, 0, canvas.width, canvas.height);
-                  }
-                }
-             
-              {// $(canvas).click(function() { return false; }); // Adds another click event
-             
-            }
-              // $(canvas).on('click.mynamespace', function() { /* Do stuff */ });
-              // $(canvas).off('click.mynamespace');
-              console.log(x)
-              
-              // console.log(x, y);
-              document.getElementById('coorx').value = x;
-              document.getElementById('coory').value = y;
-            });
-            
-          });
-          
-          function drawImageScaled(img, ctx) {
-            var canvas = ctx.canvas;
-            var hRatio = canvas.width / img.width;
-            var vRatio = canvas.height / img.height;
-            var ratio  = Math.min ( hRatio, vRatio );
-            var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-            var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.drawImage(img, 0,0, img.width, img.height,
-                                centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
-          }
-          
-          
-          </script>
-  {% endblock %}          
-          
+                
 {% endblock %}
 
+{% block javascript %}
+
+<script>
+   
+
+   var canvas;
+   var ctx;
+   var refImage;
+
+   $(document).ready(function() {
+     canvas = document.getElementById('drawing-canvas');
+     ctx = canvas.getContext('2d');
+     refImage = document.getElementById('reference-img');
+     drawImageScaled(refImage, ctx);            
+   
+     $(canvas).click(function(e) {
+       const offset = $(this).offset();
+       const x = (e.pageX - offset.left) - 5;
+       const y = (e.pageY - offset.top) + 10;
+       ctx.font = '22px normal'
+       ctx.fillStyle = 'red';
+      
+       if (ctx.fillText) {
+         var answer = window.confirm("Save data?");
+           if (answer) {
+               ctx.fillText('X', x, y);
+               $(canvas).off('click');//some code
+             }
+           else {
+           context.clearRect(0, 0, canvas.width, canvas.height);
+           }
+         }
+      
+       {// $(canvas).click(function() { return false; }); // Adds another click event
+      
+     }
+       // $(canvas).on('click.mynamespace', function() { /* Do stuff */ });
+       // $(canvas).off('click.mynamespace');
+       console.log(x)
+       
+       // console.log(x, y);
+       document.getElementById('coorx').value = x;
+       document.getElementById('coory').value = y;
+     });
+     
+   });
+   
+   function drawImageScaled(img, ctx) {
+     var canvas = ctx.canvas;
+     var hRatio = canvas.width / img.width;
+     var vRatio = canvas.height / img.height;
+     var ratio  = Math.min ( hRatio, vRatio );
+     var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+     var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+     ctx.clearRect(0,0,canvas.width, canvas.height);
+     ctx.drawImage(img, 0,0, img.width, img.height,
+                         centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);  
+   }
+   
+   
+   </script>
+{% endblock %}          
 
 
