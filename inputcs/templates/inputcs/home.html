@@ -7,9 +7,9 @@
 
 {% block content %}
 
-<div class="row g-3">
+<div class="row">
 
-    <div class="col-md-8 col-lg-5 order-md-last">
+    <div class="col-md-12 col-lg-5 order-md-first">
         <h4 class=""><span class="text-muted">Last 10 Defects</span> </h4>
         <table class="table">
             <thead>
@@ -36,7 +36,7 @@
           </table>
     </div>
 
-    <div class="col-md-7 col-lg-7">
+    <div class="col-md-12s col-lg-7">
 
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Car Body</span>
@@ -114,66 +114,24 @@
 
 
 
-        {% block javascript %}
-        <script >
-    
-            var canvas;
-            var ctx;
-            var refImage;
-    
-            $(document).ready(function() {
-            canvas = document.getElementById('drawing-canvas');
-            ctx = canvas.getContext('2d');
-            refImage = document.getElementById('reference-img');
-            drawImageScaled(refImage, ctx);
-                ctx.font = '22px normal'
-                ctx.fillStyle = 'red';
-                {% for i in defects %}
-                ctx.fillText("{{ i.id }}", "{{i.coorx}}", "{{i.coory}}");
-                {% endfor %}
-            // $(canvas).click(function(e) {
-            //     const offset = $(this).offset();
-            //     const x = (e.pageX - offset.left) - 5;
-            //     const y = (e.pageY - offset.top) + 10;
-            //     ctx.font = '22px normal'
-            //     ctx.fillStyle = 'red';
-            //     ctx.fillText("{{ i.id }}", x, y);
-                // console.log(ctx, refImage)
-                // console.log(x, y);
-                // console.log(e.pageX);
-                // console.log(offset);
-            });
-    
-            function drawImageScaled(img, ctx) {
-            var canvas = ctx.canvas;
-            var hRatio = canvas.width / img.width;
-            var vRatio = canvas.height / img.height;
-            var ratio  = Math.min ( hRatio, vRatio );
-            var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-            var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.drawImage(img, 0,0, img.width, img.height,
-                                centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
-            }
-    
-    
-        </script>
-
+       
+{% endblock %}
+{% block javascript %}
 <script >
-    
-    var canvas2;
-    var ctx2;
-    var refImage2;
+
+    var canvas;
+    var ctx;
+    var refImage;
 
     $(document).ready(function() {
-    canvas2 = document.getElementById('drawing-canvas2');
-    ctx2 = canvas2.getContext('2d');
-    refImage2 = document.getElementById('reference-img2');
-    drawImageScaled(refImage2, ctx2);
-        ctx2.font = '22px normal'
-        ctx2.fillStyle = 'red';
+    canvas = document.getElementById('drawing-canvas');
+    ctx = canvas.getContext('2d');
+    refImage = document.getElementById('reference-img');
+    drawImageScaled(refImage, ctx);
+        ctx.font = '22px normal'
+        ctx.fillStyle = 'red';
         {% for i in defects %}
-        ctx2.fillText("{{ i.id }}", "{{i.coorx}}", "{{i.coory}}");
+        ctx.fillText("{{ i.id }}", "{{i.coorx}}", "{{i.coory}}");
         {% endfor %}
     // $(canvas).click(function(e) {
     //     const offset = $(this).offset();
@@ -203,10 +161,52 @@
 
 </script>
 
+<script >
+
+var canvas2;
+var ctx2;
+var refImage2;
+
+$(document).ready(function() {
+canvas2 = document.getElementById('drawing-canvas2');
+ctx2 = canvas2.getContext('2d');
+refImage2 = document.getElementById('reference-img2');
+drawImageScaled(refImage2, ctx2);
+ctx2.font = '22px normal'
+ctx2.fillStyle = 'red';
+{% for i in defects %}
+ctx2.fillText("{{ i.id }}", "{{i.coorx}}", "{{i.coory}}");
+{% endfor %}
+// $(canvas).click(function(e) {
+//     const offset = $(this).offset();
+//     const x = (e.pageX - offset.left) - 5;
+//     const y = (e.pageY - offset.top) + 10;
+//     ctx.font = '22px normal'
+//     ctx.fillStyle = 'red';
+//     ctx.fillText("{{ i.id }}", x, y);
+// console.log(ctx, refImage)
+// console.log(x, y);
+// console.log(e.pageX);
+// console.log(offset);
+});
+
+function drawImageScaled(img, ctx) {
+var canvas = ctx.canvas;
+var hRatio = canvas.width / img.width;
+var vRatio = canvas.height / img.height;
+var ratio  = Math.min ( hRatio, vRatio );
+var centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+var centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+ctx.clearRect(0,0,canvas.width, canvas.height);
+ctx.drawImage(img, 0,0, img.width, img.height,
+                centerShift_x,centerShift_y,img.width*ratio, img.height*ratio);
+}
+
+
+</script>
 
 
 
 
-        {% endblock %}
 
 {% endblock %}
