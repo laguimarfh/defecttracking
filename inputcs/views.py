@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, FormView, CreateView
 from . import models, forms
-from inputcs.models import Post, AjaxImage
+from inputcs.models import Post, AjaxImage, Sheet
 from inputcs.forms import PostForm, AjaxImageForm
 import json
 
@@ -37,6 +37,7 @@ class InputView(TemplateView):
 
     def get_context_data(self, **kwargs):
         sheet_form = forms.SheetForm
+
         context = super().get_context_data(**kwargs)
         
         context['sheet_form'] = sheet_form
@@ -58,7 +59,7 @@ class DefectFormView(CreateView):
         messages.add_message(
         self.request,
         messages.SUCCESS,
-        'Thank you! Your photo has been saved.'
+        'Thank you! Defect saved'
     )
         return super().form_valid(form)
 
