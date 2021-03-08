@@ -54,7 +54,9 @@ class DefectFormView(CreateView):
         'period',
         'coorx',
         'coory',
+        'photo',
     ]
+    
     def form_valid(self, form):
         messages.add_message(
         self.request,

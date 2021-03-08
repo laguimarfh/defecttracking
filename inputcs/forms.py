@@ -13,6 +13,7 @@ class SheetForm(forms.ModelForm):
             'period',
             'coorx',
             'coory',
+            'photo',
         ]
         widgets = {
             'coorx': forms.HiddenInput(),
